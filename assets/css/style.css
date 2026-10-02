@@ -879,6 +879,90 @@ a {
     color: #d7dadd;
 }
 
+/* =========================================================
+   MEMBER SOCIAL MEDIA
+========================================================= */
+
+.member-social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+
+    margin-top: 12px;
+}
+
+
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 27px;
+
+    padding:
+        0
+        9px;
+
+    border:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.12
+        );
+
+    border-radius: 999px;
+
+    color: #858d94;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.02
+        );
+
+    font-size: 7px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.04em;
+
+    cursor: pointer;
+
+    transition:
+        color 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.social-link:hover {
+    color: #fff;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.08
+        );
+
+    border-color:
+        rgba(
+            255,
+            255,
+            255,
+            0.25
+        );
+
+    transform:
+        translateY(-2px);
+}
+
 
 .member-card:hover
 .member-photo img {
@@ -1948,6 +2032,182 @@ a {
 
     .member-info p {
         font-size: 8px;
+    }
+
+}
+
+/* =========================================================
+   HAMBURGER MENU (tambahan, hanya aktif di layar kecil)
+========================================================= */
+
+.nav-toggle {
+    display: none;
+}
+
+
+@media (max-width: 768px) {
+
+    .nav-toggle {
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+        justify-content: center;
+
+        gap: 5px;
+
+        width: 42px;
+        height: 42px;
+
+        padding: 0;
+
+        border:
+            1px solid
+            rgba(
+                255,
+                255,
+                255,
+                0.16
+            );
+
+        border-radius: 50%;
+
+        background:
+            rgba(
+                15,
+                18,
+                21,
+                0.35
+            );
+
+        cursor: pointer;
+    }
+
+
+    .nav-toggle span {
+        display: block;
+
+        width: 18px;
+        height: 2px;
+
+        background: #fff;
+
+        transition:
+            transform 0.25s ease,
+            opacity 0.2s ease;
+    }
+
+
+    .nav-toggle.active span:nth-child(1) {
+        transform:
+            translateY(7px)
+            rotate(45deg);
+    }
+
+
+    .nav-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+
+    .nav-toggle.active span:nth-child(3) {
+        transform:
+            translateY(-7px)
+            rotate(-45deg);
+    }
+
+
+    /* Menu dropdown */
+
+    .site-nav {
+        position: absolute;
+
+        top: 100%;
+        left: 0;
+        right: 0;
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 0;
+
+        padding:
+            8px
+            20px
+            18px;
+
+        background: #2d3338;
+
+        border-bottom:
+            1px solid
+            rgba(
+                255,
+                255,
+                255,
+                0.1
+            );
+
+        box-shadow:
+            0 20px 40px
+            rgba(
+                0,
+                0,
+                0,
+                0.35
+            );
+
+        visibility: hidden;
+
+        opacity: 0;
+
+        transform:
+            translateY(-10px);
+
+        transition:
+            opacity 0.25s ease,
+            transform 0.25s ease,
+            visibility 0.25s ease;
+    }
+
+
+    .site-nav.open {
+        visibility: visible;
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+
+
+    .site-nav a {
+        padding:
+            15px
+            0;
+
+        border-bottom:
+            1px solid
+            rgba(
+                255,
+                255,
+                255,
+                0.07
+            );
+
+        font-size: 13px;
+    }
+
+
+    .site-nav a:last-child {
+        border-bottom: 0;
+    }
+
+
+    /* Garis hover tidak diperlukan di menu HP */
+    .site-nav a::after {
+        display: none;
     }
 
 }

@@ -26,6 +26,73 @@ const modalMajor =
 const modalDescription =
     document.getElementById("modalDescription");
 
+/* =========================================================
+   MEMBER SOCIAL MEDIA
+========================================================= */
+
+const socialLinks =
+    document.querySelectorAll(".social-link");
+
+
+socialLinks.forEach((link) => {
+
+    link.addEventListener(
+        "click",
+        (event) => {
+
+            event.stopPropagation();
+
+            const url =
+                link.dataset.social;
+
+            if (!url) {
+                return;
+            }
+
+            window.open(
+                url,
+                "_blank",
+                "noopener,noreferrer"
+            );
+
+        }
+    );
+
+
+    /* Keyboard support */
+
+    link.addEventListener(
+        "keydown",
+        (event) => {
+
+            if (
+                event.key === "Enter" ||
+                event.key === " "
+            ) {
+
+                event.preventDefault();
+                event.stopPropagation();
+
+                const url =
+                    link.dataset.social;
+
+                if (!url) {
+                    return;
+                }
+
+                window.open(
+                    url,
+                    "_blank",
+                    "noopener,noreferrer"
+                );
+
+            }
+
+        }
+    );
+
+});
+
 
 /* OPEN MEMBER MODAL */
 
@@ -316,4 +383,133 @@ document.addEventListener(
         }
 
     }
-);``
+);
+
+/* =========================================================
+   HAMBURGER MENU
+========================================================= */
+
+(function () {
+
+    const header =
+        document.querySelector(".site-header");
+
+    const nav =
+        header
+            ? header.querySelector(".site-nav")
+            : null;
+
+    if (!header || !nav) {
+        return;
+    }
+
+
+    /* Buat tombol burger */
+
+    const toggle =
+        document.createElement("button");
+
+    toggle.type = "button";
+
+    toggle.className = "nav-toggle";
+
+    toggle.setAttribute(
+        "aria-label",
+        "Buka menu"
+    );
+
+    toggle.setAttribute(
+        "aria-expanded",
+        "false"
+    );
+
+    toggle.innerHTML =
+        "<span></span><span></span><span></span>";
+
+    header.appendChild(toggle);
+
+
+    function setMenu(open) {
+
+        nav.classList.toggle("open", open);
+
+        toggle.classList.toggle("active", open);
+
+        toggle.setAttribute(
+            "aria-expanded",
+            String(open)
+        );
+
+        toggle.setAttribute(
+            "aria-label",
+            open ? "Tutup menu" : "Buka menu"
+        );
+
+    }
+
+
+    toggle.addEventListener("click", (event) => {
+
+        event.stopPropagation();
+
+        setMenu(
+            !nav.classList.contains("open")
+        );
+
+    });
+
+
+    /* Tutup saat link diklik */
+
+    nav.querySelectorAll("a").forEach((link) => {
+
+        link.addEventListener("click", () => {
+
+            setMenu(false);
+
+        });
+
+    });
+
+
+    /* Tutup saat klik di luar menu */
+
+    document.addEventListener("click", (event) => {
+
+        if (
+            !header.contains(event.target)
+        ) {
+
+            setMenu(false);
+
+        }
+
+    });
+
+
+    /* Tutup dengan tombol Escape */
+
+    document.addEventListener("keydown", (event) => {
+
+        if (event.key === "Escape") {
+
+            setMenu(false);
+
+        }
+
+    });
+
+
+    /* Reset saat layar kembali lebar */
+
+    window.addEventListener("resize", () => {
+
+        if (window.innerWidth > 768) {
+
+            setMenu(false);
+
+        }
+
+    });
+
+})();
